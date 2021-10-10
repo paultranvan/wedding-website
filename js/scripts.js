@@ -239,6 +239,33 @@ $(document).ready(function () {
 
 /********************** Extras **********************/
 
+// OSM
+function lon2tile(lon, zoom) {
+    return (Math.floor((lon+180)/360*Math.pow(2,zoom))); 
+  }
+  function lat2tile(lat, zoom)  {
+    return (Math.floor((1-Math.log(Math.tan(lat*Math.PI/180) + 1/Math.cos(lat*Math.PI/180))/Math.PI)/2 *Math.pow(2,zoom)));
+  }
+
+  var long_deg = 43.27536
+  var lat_deg = 5.92255
+  var mymap = L.map('mapid').setView([long_deg, lat_deg], 18);
+  var zoom = 18;
+  var n = Math.pow(2, zoom)
+
+  var xtile = lon2tile(long_deg, zoom)
+  var ytile = lat2tile(lat_deg, zoom)
+  L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 15,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'pk.eyJ1IjoicHRyYW52YW4iLCJhIjoiY2t1bGg5ajJ4MDRqYzJvcGlyMWxzZm5uciJ9.UyLjolb8HBnUoKrV0W7ABg'
+    }).addTo(mymap);
+
+
+
 // Google map
 function initMap() {
     var location = {lat: 22.5932759, lng: 88.27027720000001};

@@ -247,23 +247,36 @@ function lon2tile(lon, zoom) {
     return (Math.floor((1-Math.log(Math.tan(lat*Math.PI/180) + 1/Math.cos(lat*Math.PI/180))/Math.PI)/2 *Math.pow(2,zoom)));
   }
 
-  var long_deg = 43.27536
-  var lat_deg = 5.92255
-  var mymap = L.map('mapid').setView([long_deg, lat_deg], 18);
-  var zoom = 18;
+  var long_cancerilles = 43.27536
+  var lat_cancerilles = 5.92255
+  var long_mairie = 43.3395423
+  var lat_mairie = 5.9742479
+
+  var long = 43.312345014362734
+  var lat = 5.944689788618834
+
+  var map = L.map('mapid').setView([long, lat], 12);
+  var zoom = 14;
   var n = Math.pow(2, zoom)
 
-  var xtile = lon2tile(long_deg, zoom)
-  var ytile = lat2tile(lat_deg, zoom)
+  var xtile = lon2tile(long, zoom)
+  var ytile = lat2tile(lat, zoom)
   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 15,
+        maxZoom: 18,
         id: 'mapbox/streets-v11',
         tileSize: 512,
         zoomOffset: -1,
         accessToken: 'pk.eyJ1IjoicHRyYW52YW4iLCJhIjoiY2t1bGg5ajJ4MDRqYzJvcGlyMWxzZm5uciJ9.UyLjolb8HBnUoKrV0W7ABg'
-    }).addTo(mymap);
-
+    }).addTo(map);
+  L.marker([long_cancerilles, lat_cancerilles])
+    .addTo(map)
+    .bindPopup('<b>Demeure de Cancerilles</b><br>1380 route de Belgentier<br>83870 Signes', {autoClose: false})
+    .openPopup();
+  L.marker([long_mairie, lat_mairie])
+    .addTo(map)
+    .bindPopup('<b>Mairie</b><br>31 Rue Georges Clemenceau<br>83136 La Roquebrussanne', {autoClose: false})
+    .openPopup();
 
 
 // Google map

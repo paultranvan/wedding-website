@@ -252,8 +252,8 @@ Hero
 ========================================================================== */
 .hero {
   min-height: 750px;
-  background: url('../img/prekeistolen.jpg') center center;
   -webkit-background-size: cover;
+  background: url('../img/pauletpauline/prekeistolen.jpg') center center;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
@@ -903,4 +903,10 @@ body.modal-open {
 }
 .modal-body {
   padding:25px;
+}
+
+
+// custom
+.photo-paul {
+  padding-top: 40px;
 }
